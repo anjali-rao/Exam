@@ -1,0 +1,71 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Student.master.cs" Inherits="Student" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <%-- Student account master page-design --%>
+    <title>Untitled Page</title>
+</head>
+<body background="pictures/img38.jpg">
+    <form id="form1" runat="server">
+    <div>
+           <marquee direction="down" id="MARQUEE1" style="z-index: 105; left: 176px; width: 200px; position: absolute; top: 0px; height: 144px"><SPAN 
+style="FONT-SIZE: 16pt; COLOR: darkmagenta; FONT-FAMILY: Monotype Corsiva" >&nbsp;&nbsp;&nbsp; 
+<BR />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Examination</SPAN></marquee><marquee  direction="down" style="z-index: 106; left: 568px; width: 208px; position: absolute; top: 0px; height: 144px"><SPAN 
+style="FONT-SIZE: 16pt; COLOR: darkmagenta; FONT-FAMILY: Monotype Corsiva">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR 
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Simulation</SPAN></marquee>
+        <br />
+        <asp:Menu ID="Menu1" runat="server" Font-Names="Rockwell Extra Bold" ForeColor="DarkRed"
+            Height="24px" Orientation="Horizontal" Style="z-index: 101; left: 4px; position: absolute;
+            top: 144px" Width="976px" Font-Bold="True" BackColor="Plum">
+            <Items>
+            <asp:MenuItem Text="Home"  Value="Home"></asp:MenuItem>
+            <asp:MenuItem Text="Question paper" Value="Question paper" >
+            <asp:MenuItem Text="True/False" Value="tf" NavigateUrl="~/TFBasedQp.aspx"></asp:MenuItem>
+            <asp:MenuItem Text="Optionsbased" Value="op" NavigateUrl="~/oPBasedQP.aspx"></asp:MenuItem>
+            </asp:MenuItem>
+            
+
+            <asp:MenuItem Text="Help" Value="Help" NavigateUrl="~/helpStudent.aspx"></asp:MenuItem>
+            
+            <asp:MenuItem Text="Log Out" Value="Log Out" NavigateUrl="~/home.aspx"></asp:MenuItem>
+            </Items>
+            <LevelMenuItemStyles>
+                <asp:MenuItemStyle Font-Underline="False" HorizontalPadding="2px" ItemSpacing="10px"
+                    VerticalPadding="2px" />
+            </LevelMenuItemStyles>
+        </asp:Menu>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="font-size: 16pt; color: darkmagenta; font-family: Monotype Corsiva">
+           </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp;<span style="font-size: 16pt; color: darkmagenta; font-family: Monotype Corsiva"></span>&nbsp;&nbsp;<br />
+        <br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: darkmagenta">
+            &nbsp; &nbsp; &nbsp; </span><strong><span style="font-size: 36pt; color: darkmagenta;
+                font-family: Monotype Corsiva">Students<br />
+            </span></strong>
+        <br />
+        <asp:Image ID="Image1" runat="server" Height="80px" ImageUrl="~/pictures/img16.jpg"
+            Style="z-index: 102; left: 0px; position: absolute; top: 0px" Width="176px" />
+        
+        <asp:Image ID="Image3" runat="server" Height="80px" ImageUrl="~/pictures/img13.jpg"
+            Style="z-index: 104; left: 784px; position: absolute; top: 0px" Width="176px" />
+        <br />
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+</body>
+</html>
