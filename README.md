@@ -29,10 +29,6 @@ The application displays 10 questions randomly out the given set of questions.
 
 The exam lasts for 1 minute currently after which the page will time out. 
 
-Features yet to be done:
-
-Algorithm for random display of questions
-Variable timers for different subjects which is set by the instructor.
 
 Student Module:
 
