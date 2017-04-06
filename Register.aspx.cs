@@ -1,122 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Common;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
-using System.Configuration;
-
 
 public partial class Register : System.Web.UI.Page
 {
+  
+    SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-7A60SOS;Initial Catalog=OnlineExamination;Integrated Security=true");
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        con.Open();
     }
-
-    public void btn_reg(object sender, EventArgs e)
+    protected void Button1_Click(object sender, EventArgs e)
     {
-        if (ListBox1.SelectedValue == "Student")
+        //Check if the user exists using user ID and password
+        string s1 = "select uid,pwd from Registration where uid='" + TextBox6.Text + "' and pwd='" + TextBox7.Text + "'";
+        SqlCommand cmd = new SqlCommand(s1, con);
+        SqlDataReader dr;
+        dr = cmd.ExecuteReader();
+        if (dr.Read())
         {
 
-            string constr = @"Data Source=DESKTOP-7A60SOS;Initial Catalog=VirtualExam;User ID=sa;Password=Anj2";
-            int userId = 0;
+            Response.Write("<script LANGUAGE='JavaScript' >alert('User Exists')</script>");
+           
+        }
+        else
 
-            using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("Insert_User"))
-                {
-                    cmd.Connection = con;
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
-                    {
-
-
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@ID", regID.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Name", regname.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Password", regpwd.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Email", Email.Text.Trim());
-                        con.Open();
-                        userId = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                        con.Close();
-                    }
-                }
-                string message = string.Empty;
-                switch (userId)
-                {
-                    case -1:
-                        message = "Username already exists.\\nPlease choose a different username.";
-                        break;
-                    case -2:
-                        message = "Supplied email address has already been used.";
-                        break;
-                    case -3:
-                        message = "Registration successful";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');window.open('Default.aspx')", true);
-                        break;
-                    default:
-                        message = "Registration unsuccessful.";
-                        break;
-                }
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-            }
-        }
-
-
-        else if (ListBox1.SelectedValue == "Faculty")
-        {
-
-            string constr = @"Data Source=DESKTOP-7A60SOS;Initial Catalog=VirtualExam;User ID=sa;Password=Anj2";
-            int userId = 0;
-
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("Insert_faculty"))
-                {
-                    cmd.Connection = con;
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
-                    {
-
-
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@ID", regID.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Name", regname.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Password", regpwd.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Email", Email.Text.Trim());
-                        con.Open();
-                        userId = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                        con.Close();
-                    }
-                }
-                string message = string.Empty;
-                switch (userId)
-                {
-                    case -1:
-                        message = "Username already exists.\\nPlease choose a different username.";
-                        break;
-                    case -2:
-                        message = "Supplied email address has already been used.";
-                        break;
-                    case -3:
-                        message = "Registration successful.";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');window.open('Default.aspx')", true);
-                        break;
-                    default:
-                        message = "Registration unsuccessful.";
-                        break;
-                }
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
-            }
-        }
-
-        else 
-        {
-            ClientScript.RegisterStartupScript(Page.GetType(), "validation", "<script language='javascript'>alert('Select User Type')</script>");
-        }
-
-}
+            //if the user is new, then insert the record in the database. The primary key ID is displayed to user.
+            con.Close();
+            con.Open();
+            Session["sid"] = TextBox6.Text;
+        string s2 = "insert into Registration values('" + TextBox1.Text + "','" + TextBox2.Text + "','" + RadioButtonList1.SelectedItem.Text + "','" + DropDownList3.SelectedItem.Text + "','" + TextBox5.Text + "','" + TextBox6.Text + "','" + TextBox7.Text + "','" + TextBox8.Text + "','" + DropDownList1.SelectedItem.Text + "','" + DropDownList2.SelectedItem.Text + "','" + TextBox9.Text + "')";
+        SqlCommand cmdd = new SqlCommand(s2, con);
+        cmdd.ExecuteNonQuery();
+            con.Close();
+            Response.Redirect("RegAck.aspx");
     }
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        //clear button to clear all fields
+
+        TextBox1.Text = "";
+        TextBox2.Text = "";
+        TextBox5.Text = "";
+        TextBox6.Text = "";
+        TextBox7.Text = "";
+        TextBox8.Text = "";
+        TextBox9.Text = "";
+        DropDownList1.SelectedItem.Text = DropDownList1.Items[0].Text;
+        DropDownList2.SelectedItem.Text = DropDownList2.Items[0].Text;
+        DropDownList3.SelectedItem.Text = DropDownList3.Items[0].Text;
+        RadioButtonList1.Items[0].Selected = false;
+        RadioButtonList1.Items[1].Selected = false;
+    }
+
+    protected void Back_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Home.aspx");//redirect to home page
+    }
+
+    protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
+    }
+}
